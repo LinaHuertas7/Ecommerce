@@ -1,28 +1,24 @@
-'use strict';
+"use strict";
 
-const User = require('../models/User');
+const { User } = require("../models/index");
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up (queryInterface, Sequelize) {
-    /* await queryInterface.bulkInsert('Users', [{
-      name: 'John Doe',
-      email:'john@example',
-      password: 'password'
-    }], {}); */
-    return User.create({
-      name: 'John Doe',
-      email:'john@example',
-      password: 'password'
-    })
+  async up(queryInterface, Sequelize) {
+    await User.create({
+      name: "John Doe",
+      email: "john@example",
+      password: "password",
+      slug: "john-doe",
+    });
   },
 
-  async down (queryInterface, Sequelize) {
+  async down(queryInterface, Sequelize) {
     /**
      * Add commands to revert seed here.
      *
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-  }
+  },
 };
