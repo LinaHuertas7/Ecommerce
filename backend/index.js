@@ -3,10 +3,7 @@ const routes = require('./routes')
 const app = express()
 
 app.use(express.json())
-/* const db = require("./models/index.js");
-db.sequelize.sync({ force: true }); */
 
-// respond with "hello world" when a GET request is made to the homepage
 app.get('/', (req, res) => {
 	res.send('hello world')
 })
