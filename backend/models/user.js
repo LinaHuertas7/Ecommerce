@@ -24,6 +24,8 @@ module.exports = (sequelize, DataTypes) => {
 		{
 			sequelize,
 			modelName: 'User',
+			paranoid: true,
+			deletedAt: 'deleted_at',
 		}
 	)
 
@@ -32,15 +34,19 @@ module.exports = (sequelize, DataTypes) => {
 			const salt = await bcrypt.genSaltSync(10, 'a')
 			user.password = bcrypt.hashSync(user.password, salt)
 		}
-
 		const random = Math.random().toString(36)
-
 		user.slug = random.substring(2, 12).toLocaleUpperCase()
+	})
+
+	User.beforeUpdate(async (user, options) => {
+		if (user.password) {
+			const salt = await bcrypt.genSaltSync(10, 'a')
+			user.password = bcrypt.hashSync(user.password, salt)
+		}
 	})
 
 	User.prototype.validPassword = async function (password) {
 		return await bcrypt.compare(password, this.password)
 	}
-
 	return User
 }

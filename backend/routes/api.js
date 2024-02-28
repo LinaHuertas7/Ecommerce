@@ -9,7 +9,13 @@ const {
 	profile: profileController,
 } = require('./../controllers/authController')
 
-const { getAllUsers } = require('./../controllers/userController')
+const {
+	getAllUsers,
+	getUserBySlug,
+	storeUser,
+	updateUser,
+	deleteUser,
+} = require('./../controllers/userController')
 
 const { loginRequest, registerRequest } = require('./../request/AuthRequest')
 const { validateRequest } = require('./../request/RequestValidator')
@@ -38,15 +44,15 @@ route.get('/auth/profile', middlewareValidateUser, profileController)
 route.get('/users', getAllUsers)
 
 // Get user by slug
-route.get('/users/:slug', middlewareValidateUser)
+route.get('/users/:slug', getUserBySlug)
 
 // Store user
-route.post('/users', middlewareValidateUser)
+route.post('/users', storeUser)
 
 // Update user
-route.put('/users/:slug', middlewareValidateUser)
+route.put('/users/:slug', updateUser)
 
 // Delete user
-route.delete('/users/:slug', middlewareValidateUser)
+route.delete('/users/:slug', deleteUser)
 
 module.exports = route
