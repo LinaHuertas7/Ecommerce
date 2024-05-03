@@ -1,5 +1,4 @@
 'use strict'
-
 const { User } = require('../models/index')
 
 /** @type {import('sequelize-cli').Migration} */
